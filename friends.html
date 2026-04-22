@@ -1,0 +1,333 @@
+<!doctype html>
+<head>
+  <link rel="stylesheet" href="index.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap"
+    rel="stylesheet"
+  />
+  <title>friends</title>
+  <link rel="icon" type="image/x-icon" href="cool_gallery/kastrulya.png" />
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react",
+        "react-dom": "https://esm.sh/react-dom/client"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <div class="navbar jersey-20-regular">
+      <ul>
+        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Cool Gallery</a></li>
+        <!-- <li><a href="basement_studio.html">basement</a></li> -->
+      </ul>
+    </div>
+  </header>
+  <div id="graph"></div>
+
+  <script src="//cdn.jsdelivr.net/npm/@babel/standalone"></script>
+  <script type="text/babel" data-type="module">
+    import ForceGraph3D from "https://esm.sh/react-force-graph-3d?external=react";
+    import React, { useRef, useEffect } from "react";
+    import { createRoot } from "react-dom";
+    import SpriteText from "https://esm.sh/three-spritetext";
+    
+
+
+    const friends = {
+      nodes: [
+        { id: "Tabller", group: 1 },
+        { id: "err0r522", group: 1 },
+        //{ id: "Миркомир", group: 2 },
+        //{ id: "Подвал", group: 2 },
+        //{ id: "Шарарам вики", group: 2 },
+        //{ id: "Империя Лосяша", group: 2 },
+        //{ id: "Золотой Ключик", group: 2 },
+        { id: "miamur_paws", group: 1 },
+        { id: "Kotyarendj", group: 1 },
+        { id: "The_Cheshiria", group: 3 },
+        { id: "LeadCone_TNF", group: 3 },
+        { id: "rer_5111", group: 4 },
+        { id: "GOONNABECABBAGE", group: 1 },
+        { id: "Eathleees", group: 1 },
+        { id: "Tomty", group: 1 },
+        { id: "Jstbgrsjh", group: 1 },
+        { id: "Glitchtale Frisk", group: 7 },
+        { id: "SwapShift Frisk", group: 7 },
+        { id: "epep.", group: 1 },
+        { id: "El_Capone", group: 1 },
+        { id: "Енот", group: 5 },
+        { id: "Makkov", group: 5 },
+        { id: "Daisydusya", group: 6 },
+        { id: "Didymo", group: 8 },
+        { id: "alexany00", group: 8 },
+        { id: "Shekolda", group: 8 },
+        { id: "Remgler", group: 8 },
+        { id: "Smerch", group: 8 },
+        { id: "PictishBoiii", group: 8 },
+        { id: "Max_CSD", group: 8 },
+        { id: "Domovoy", group: 8 },
+        { id: "tsap_wl", group: 9 },
+        { id: "_VinRer_", group: 1 },
+        { id: "Chpiquelette", group: 9 },
+        { id: "DreamSails", group: 1 },
+        { id: "Chugchgur", group: 8 },
+        { id: "Shadowa", group: 7 },
+        { id: "Overhead", group: 7 },
+        { id: "lilesia4656", group: 6 },
+        { id: "Anatolkin", group: 10 },
+        //{ id: "WalterCraft", group: 2 },
+        //{ id: "Солнчинск", group: 2 },
+        { id: "Mistor_54", group: 11},
+        { id: "Cybersyr", group: 3},
+        { id: "Dayson", group: 3},
+        { id: "HelixIsus", group: 12},
+
+      ],
+      links: [
+        { source: "HelixIsus", target: "Kotyarendj", value: 1 },
+        { source: "HelixIsus", target: "Tabller", value: 2 },
+        { source: "HelixIsus", target: "LeadCone_TNF", value: 1 },
+        { source: "HelixIsus", target: "rer_5111", value: 1 },
+        { source: "HelixIsus", target: "Tomty", value: 1 },
+        { source: "HelixIsus", target: "_VinRer_", value: 3 },
+        { source: "HelixIsus", target: "Chugchgur", value: 1 },
+
+        { source: "DreamSails", target: "Kotyarendj", value: 1 },
+        { source: "DreamSails", target: "Tabller", value: 3 },
+        { source: "DreamSails", target: "LeadCone_TNF", value: 1 },
+        { source: "DreamSails", target: "rer_5111", value: 1 },
+        { source: "DreamSails", target: "GOONNABECABBAGE", value: 1 },
+        { source: "DreamSails", target: "Eathleees", value: 1 },
+        { source: "DreamSails", target: "Tomty", value: 1 },
+        { source: "DreamSails", target: "Jstbgrsjh", value: 1 },
+        { source: "DreamSails", target: "epep.", value: 1 },
+        { source: "DreamSails", target: "SwapShift Frisk", value: 1 },
+        { source: "DreamSails", target: "Glitchtale Frisk", value: 1 },
+        { source: "DreamSails", target: "El_Capone", value: 1 },
+        { source: "DreamSails", target: "Енот", value: 1 },
+        { source: "DreamSails", target: "Daisydusya", value: 1 },
+        { source: "DreamSails", target: "_VinRer_", value: 1 },
+        { source: "DreamSails", target: "Chugchgur", value: 1 },
+        { source: "DreamSails", target: "Shadowa", value: 1 },
+        { source: "DreamSails", target: "Overhead", value: 1 },
+        { source: "DreamSails", target: "Anatolkin", value: 3 },
+
+        { source: "The_Cheshiria", target: "Kotyarendj", value: 3 },
+        { source: "The_Cheshiria", target: "Tabller", value: 2 },
+        { source: "The_Cheshiria", target: "miamur_paws", value: 1 },
+        { source: "The_Cheshiria", target: "rer_5111", value: 2 },
+        { source: "The_Cheshiria", target: "Eathleees", value: 1 },
+        { source: "The_Cheshiria", target: "Tomty", value: 2 },
+        { source: "The_Cheshiria", target: "Shekolda", value: 1 },
+        { source: "The_Cheshiria", target: "Smerch", value: 1 },
+        { source: "The_Cheshiria", target: "PictishBoiii", value: 1 },
+        { source: "The_Cheshiria", target: "Domovoy", value: 1 },
+        { source: "The_Cheshiria", target: "tsap_wl", value: 1 },
+        { source: "The_Cheshiria", target: "_VinRer_", value: 1 },
+        { source: "The_Cheshiria", target: "Chpiquelette", value: 3 },
+        { source: "The_Cheshiria", target: "DreamSails", value: 1 },
+        { source: "The_Cheshiria", target: "Chugchgur", value: 2 },
+
+        { source: "LeadCone_TNF", target: "Kotyarendj", value: 3 },
+        { source: "LeadCone_TNF", target: "Tabller", value: 3 },
+        { source: "LeadCone_TNF", target: "miamur_paws", value: 1 },
+        { source: "LeadCone_TNF", target: "The_Cheshiria", value: 2 },
+        { source: "LeadCone_TNF", target: "Eathleees", value: 1 },
+        { source: "LeadCone_TNF", target: "Tomty", value: 3 },
+        { source: "LeadCone_TNF", target: "Jstbgrsjh", value: 1 },
+        { source: "LeadCone_TNF", target: "El_Capone", value: 1 },
+        { source: "LeadCone_TNF", target: "Didymo", value: 1 },
+        { source: "LeadCone_TNF", target: "Smerch", value: 1 },
+        { source: "LeadCone_TNF", target: "PictishBoiii", value: 1 },
+        { source: "LeadCone_TNF", target: "Domovoy", value: 1 },
+        { source: "LeadCone_TNF", target: "tsap_wl", value: 1 },
+        { source: "LeadCone_TNF", target: "_VinRer_", value: 1 },
+        { source: "LeadCone_TNF", target: "Chpiquelette", value: 1 },
+        { source: "LeadCone_TNF", target: "Chugchgur", value: 2 },
+
+        { source: "rer_5111", target: "Kotyarendj", value: 3 },
+        { source: "rer_5111", target: "Tabller", value: 3 },
+        { source: "rer_5111", target: "miamur_paws", value: 1 },
+        { source: "rer_5111", target: "LeadCone_TNF", value: 3 },
+        { source: "rer_5111", target: "Eathleees", value: 2 },
+        { source: "rer_5111", target: "Jstbgrsjh", value: 2 },
+        { source: "rer_5111", target: "El_Capone", value: 1 },
+        { source: "rer_5111", target: "Didymo", value: 1 },
+        { source: "rer_5111", target: "alexany00", value: 1 },
+        { source: "rer_5111", target: "Shekolda", value: 1 },
+        { source: "rer_5111", target: "Remgler", value: 1 },
+        { source: "rer_5111", target: "PictishBoiii", value: 1 },
+        { source: "rer_5111", target: "Max_CSD", value: 1 },
+        { source: "rer_5111", target: "Domovoy", value: 1 },
+        { source: "rer_5111", target: "tsap_wl", value: 1 },
+        { source: "rer_5111", target: "_VinRer_", value: 2 },
+
+        { source: "Dayson", target: "Kotyarendj", value: 1 },
+        { source: "Dayson", target: "Tabller", value: 2 },
+        { source: "Dayson", target: "The_Cheshiria", value: 2 },
+        { source: "Dayson", target: "LeadCone_TNF", value: 3 },
+        { source: "Dayson", target: "rer_5111", value: 2 },
+        { source: "Dayson", target: "Tomty", value: 2 },
+        { source: "Dayson", target: "_VinRer_", value: 1 },
+        { source: "Dayson", target: "Chugchgur", value: 2 },
+
+        { source: "Chugchgur", target: "Kotyarendj", value: 2 },
+        { source: "Chugchgur", target: "Tabller", value: 3 },
+        { source: "Chugchgur", target: "miamur_paws", value: 1 },
+        { source: "Chugchgur", target: "rer_5111", value: 2 },
+        { source: "Chugchgur", target: "Eathleees", value: 2 },
+        { source: "Chugchgur", target: "Tomty", value: 2 },
+        { source: "Chugchgur", target: "Shekolda", value: 3 },
+        { source: "Chugchgur", target: "Smerch", value: 1 },
+        { source: "Chugchgur", target: "Domovoy", value: 3 },
+        { source: "Chugchgur", target: "tsap_wl", value: 1 },
+        { source: "Chugchgur", target: "_VinRer_", value: 1 },
+        { source: "Chugchgur", target: "Chpiquelette", value: 1 },
+
+        { source: "tsap_wl", target: "Kotyarendj", value: 1 },
+        { source: "tsap_wl", target: "Tabller", value: 2 },
+        { source: "tsap_wl", target: "miamur_paws", value: 1 },
+        { source: "tsap_wl", target: "rer_5111", value: 1 },
+        { source: "tsap_wl", target: "Tomty", value: 1 },
+        { source: "tsap_wl", target: "PictishBoiii", value: 1 },
+        { source: "tsap_wl", target: "_VinRer_", value: 1 },
+        { source: "tsap_wl", target: "Chpiquelette", value: 2 },
+        { source: "tsap_wl", target: "Chugchgur", value: 1 },
+
+        { source: "Cybersyr", target: "Kotyarendj", value: 2 },
+        { source: "Cybersyr", target: "Tabller", value: 2 },
+        { source: "Cybersyr", target: "The_Cheshiria", value: 2 },
+        { source: "Cybersyr", target: "LeadCone_TNF", value: 2 },
+        { source: "Cybersyr", target: "rer_5111", value: 2 },
+        { source: "Cybersyr", target: "Eathleees", value: 1 },
+        { source: "Cybersyr", target: "Tomty", value: 2 },
+        { source: "Cybersyr", target: "Shekolda", value: 1 },
+        { source: "Cybersyr", target: "tsap_wl", value: 1 },
+        { source: "Cybersyr", target: "_VinRer_", value: 1 },
+        { source: "Cybersyr", target: "Chpiquelette", value: 1 },
+        { source: "Cybersyr", target: "DreamSails", value: 1 },
+        { source: "Cybersyr", target: "Chugchgur", value: 1 },
+        { source: "Mistor_54", target: "Kotyarendj", value: 1 },
+        { source: "Mistor_54", target: "Tabller", value: 2 },
+        { source: "Mistor_54", target: "The_Cheshiria", value: 1 },
+        { source: "Mistor_54", target: "LeadCone_TNF", value: 1 },
+        { source: "Mistor_54", target: "rer_5111", value: 1 },
+        { source: "Mistor_54", target: "Tomty", value: 1 },
+        { source: "Mistor_54", target: "_VinRer_", value: 2 },
+        { source: "Mistor_54", target: "DreamSails", value: 2 },
+
+        { source: "Tomty", target: "Kotyarendj", value: 3 },
+        { source: "Tomty", target: "miamur_paws", value: 1 },
+        { source: "Tomty", target: "LeadCone_TNF", value: 3 },
+        { source: "Tomty", target: "rer_5111", value: 2 },
+        { source: "Tomty", target: "Eathleees", value: 1 },
+        { source: "Tomty", target: "El_Capone", value: 2 },
+        { source: "Tomty", target: "Didymo", value: 1 },
+        { source: "Tomty", target: "Shekolda", value: 1 },
+        { source: "Tomty", target: "Smerch", value: 1 },
+        { source: "Tomty", target: "PictishBoiii", value: 1 },
+        { source: "Tomty", target: "Domovoy", value: 1 },
+        { source: "Tomty", target: "tsap_wl", value: 1 },
+        { source: "Tomty", target: "_VinRer_", value: 3 },
+        { source: "Tomty", target: "Chugchgur", value: 3 },
+        { source: "Tabller", target: "Kotyarendj", value: 3 },
+        { source: "Tabller", target: "Tomty", value: 3 },
+        { source: "Tabller", target: "Glitchtale Frisk", value: 1 },
+        { source: "Tabller", target: "SwapShift Frisk", value: 1 },
+        { source: "Tabller", target: "miamur_paws", value: 2 },
+        { source: "Tabller", target: "Jstbgrsjh", value: 3 },
+        { source: "Tabller", target: "GOONNABECABBAGE", value: 1 },
+        { source: "miamur_paws", target: "Kotyarendj", value: 2 },
+        /*{ source: "Миркомир", target: "Tabller", value: 1 },
+        { source: "Миркомир", target: "Kotyarendj", value: 1 },
+        { source: "Миркомир", target: "miamur_paws", value: 1 },
+        { source: "Tabller", target: "Подвал", value: 1 },
+        { source: "Tabller", target: "Золотой Ключик", value: 1 },
+        { source: "_VinRer_", target: "Золотой Ключик", value: 1 },
+        { source: "Domovoy", target: "Золотой Ключик", value: 1 },
+        { source: "Max_CSD", target: "Золотой Ключик", value: 1 },
+        { source: "Smerch", target: "Золотой Ключик", value: 1 },
+        { source: "Remgler", target: "Золотой Ключик", value: 1 },
+        { source: "miamur_paws", target: "Золотой Ключик", value: 1 },
+        { source: "Kotyarendj", target: "Золотой Ключик", value: 1 },
+        { source: "The_Cheshiria", target: "Золотой Ключик", value: 1 },
+        { source: "LeadCone_TNF", target: "Золотой Ключик", value: 1 },
+        { source: "rer_5111", target: "Золотой Ключик", value: 1 },
+        { source: "Eathleees", target: "Золотой Ключик", value: 1 },
+        { source: "El_Capone", target: "Золотой Ключик", value: 1 },
+        { source: "Didymo", target: "Золотой Ключик", value: 1 },
+        { source: "alexany00", target: "Золотой Ключик", value: 1 },
+        { source: "Shekolda", target: "Золотой Ключик", value: 1 },
+        { source: "Chugchgur", target: "Золотой Ключик", value: 1 },
+        { source: "PictishBoiii", target: "Золотой Ключик", value: 1 },
+        { source: "epep.", target: "Подвал", value: 1 },
+        { source: "Империя Лосяша", target: "Tabller", value: 1 },
+        { source: "Империя Лосяша", target: "Chpiquelette", value: 3 },
+        { source: "Империя Лосяша", target: "The_Cheshiria", value: 1 },
+        { source: "Империя Лосяша", target: "tsap_wl", value: 1 },
+        { source: "Империя Лосяша", target: "Kotyarendj", value: 1 },
+        { source: "Шарарам вики", target: "tsap_wl", value: 0 },
+        { source: "Шарарам вики", target: "The_Cheshiria", value: 0 },
+        { source: "WalterCraft", target: "Kotyarendj", value: 3 },
+        { source: "WalterCraft", target: "Tabller", value: 3 },
+        { source: "WalterCraft", target: "LeadCone_TNF", value: 3 },
+        { source: "WalterCraft", target: "rer_5111", value: 3 },
+        { source: "WalterCraft", target: "Eathleees", value: 2 },
+        { source: "WalterCraft", target: "Chugchgur", value: 3 },
+        { source: "WalterCraft", target: "DreamSails", value: 2 },
+        { source: "WalterCraft", target: "miamur_paws", value: 1 },
+        { source: "WalterCraft", target: "Tomty", value: 3 },
+        { source: "WalterCraft", target: "_VinRer_", value: 2 },
+        { source: "WalterCraft", target: "Jstbgrsjh", value: 2 },
+         */
+      ],
+    };
+
+    
+    
+    function MyGraph() {
+      const fgRef = useRef();
+
+      useEffect(() => {
+        if (fgRef.current) {
+          fgRef.current.d3Force('link').distance(200);
+        }
+      }, []);
+      return <ForceGraph3D
+        ref={fgRef}  
+        graphData={friends}
+        linkColor={(link) => {
+          if (link.value == 3) return "rgba(70, 207, 120, 1);";
+          if (link.value == 2) return "rgba(232, 228, 84, 1);";
+          if (link.value == 1) return "rgba(245, 73, 39, 1);";
+          return "rgba(255, 255, 255, 0.3)";
+        }}
+        nodeAutoColorBy="group"
+        linkWidth={1.5}
+        nodeThreeObjectExtend={true}
+        nodeThreeObject={(node) => {
+          const sprite = new SpriteText(node.id);
+          sprite.color = node.color;
+          sprite.textHeight = 8;
+          sprite.center.y = -0.6; // shift above node
+          return sprite;
+        }}
+      />
+    }
+    
+    createRoot(document.getElementById("graph")).render(
+      <MyGraph/>,
+    );
+  </script>
+</body>
