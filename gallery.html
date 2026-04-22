@@ -1,60 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="gallery.css" />
+    <title>gallery</title>
+    <link rel="icon" type="image/x-icon" href="cool_gallery/kastrulya.png">
+  </head>
 
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="index.css">
-     <link rel="stylesheet" href="gallery.css">
-     <title>Cool Gallery</title>
-</head>
+  <body>
+    <header>
+      <div class="navbar jersey-20-regular">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class="active"><a href="gallery.html">Cool Gallery</a></li>
+          <!-- <li><a href="basement_studio.html">basement</a></li> -->
+        </ul>
+      </div>
+    </header>
+    <div id="gallery"></div>
+    <script>
+      const gallery = document.getElementById("gallery");
+      const images = [
+        {
+          target: "#",
+          imgsrc: "cool_gallery/1.webp",
+          desc: "что за пипец",
+          alt: "Мем где я неудачно протестировал новый апдейт бота (звук смеха)",
+          slideshow: false,
+        },
+        {
+          target: "#",
+          imgsrc: "cool_gallery/amongyou.webp",
+          desc: "это амогус которого я нарисовал для игры в роблоксе",
+          alt: "амогус",
+          slideshow: false,
+        },
+        {
+          target: "#",
+          imgsrc: "cool_gallery/peak-level-design.webp",
+          desc: "мне кажется это какой-то неправильный дом",
+          alt: "дом в roblox, но он слишком странный (нелепая постройка)",
+          slideshow: false,
+        },
+        {
+          target: "#",
+          imgsrc: ["cool_gallery/train1.png", "cool_gallery/train2.png"],
+          desc: ["перезавоз паравоз", "перезавоз паравоз2"],
+          alt: ["паравоз застрял в земле диагонально (воткнут в неё)", "паравоз застрял в земле вертикально (воткнут в неё)"],
+          slideshow: true,
+        },
+        {
+          target: "#",
+          imgsrc: "cool_gallery/sand.png",
+          desc: "загорает",
+          alt: "rer_5111 в песке и я стою рядом",
+          slideshow: false,
+        },
+        {
+          target: "#",
+          imgsrc: "cool_gallery/glaggle.png",
+          desc: "бэби глагл",
+          alt: "Cursedsails и я в комнате Regretevator и с нами glaggles",
+          slideshow: false,
+        },
+        {
+          target: "#",
+          imgsrc: "cool_gallery/company.png",
+          desc: "мем от rer_5111",
+          alt: "мем показывающий что Kotyarendj и Tabller бездействовали, пока rer_5111 сражался с тысячью монстрами в Lethal Company",
+          slideshow: false,
+        },
+        {
+          target: "#",
+          imgsrc: ["cool_gallery/drawcontest1.png", "cool_gallery/drawcontest2.png", "cool_gallery/drawcontest3.png", "cool_gallery/drawcontest4.png", "cool_gallery/drawcontest5.png"],
+          desc: ["томат база", "томат роблокс", "томат стильный красивый", "томат емаё", "томат че за пипец"],
+          alt: ["нарисованный красный томат толстый", "нарисованный томат скин роблокс", "нарисованный томат чёрно-белый красивый", "нарисованный томат недорисован", "нарисованный томат с огромным животом"],
+          slideshow: true,
+        },
+        {
+          target: "#",
+          imgsrc: "cool_gallery/secretplan.png",
+          desc: "секретный план 69 сезона валеткрафта",
+          alt: "rer_5111 нарисовал детальнейший план как будет происходить 6 межсезон",
+          slideshow: false,
+        },
+      ];
 
-<body>
-     <header>
-          <div class="navbar">
-               <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li class="active"><a href="gallery.html">Cool Gallery</a></li>
-                    <li><a href="basement_studio.html">basement</a></li>
-               </ul>
-          </div>
-     </header>
-     <div id="gallery">
-     </div>
-     <script>
-          const gallery = document.getElementById("gallery");
-          const images = [
-               { target: "#", imgsrc: "cool_gallery/1.webp", desc: "что за пипец", alt: "Мем где я неудачно протестировал новый апдейт бота (звук смеха)" },
-               { target: "#", imgsrc: "cool_gallery/amongyou.webp", desc: "это амогус которого я нарисовал для игры в роблоксе", alt: "амогус" },
-               { target: "#", imgsrc: "cool_gallery/peak-level-design.webp", desc: "мне кажется это какой-то неправильный дом", alt: "дом в roblox, но он слишком странный (нелепая постройка)" }
-          ]
+      let slideIndex = [];
+      let slideId = [];
 
-          images.forEach(image => {
-               const picture = document.createElement("div")
-               picture.className = "photo";
-               const a = document.createElement("a");
-               a.target = image.target;
-               a.href = image.imgsrc;
+      function plusSlides(n, no) {
+        showSlides((slideIndex[no] += n), no);
+      }
 
-               const img = document.createElement("img");
-               img.src = image.imgsrc;
+      function showSlides(n, no) {
+        let i;
+        let x = document.getElementsByClassName(slideId[no]);
+        if (n > x.length) {
+          slideIndex[no] = 1;
+        }
+        if (n < 1) {
+          slideIndex[no] = x.length;
+        }
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        x[slideIndex[no] - 1].style.display = "block";
+      }
 
-               a.append(img)
-               picture.append(a);
+      let slideshowNo = 0;
+      images.forEach((image, index) => {
+        if (image.slideshow) {
+          const container = document.createElement("div");
+          container.className = "slideshow-container";
+          
+          const currentSlideNo = slideshowNo;
 
+          for (let i = 0; i < image.imgsrc.length; i++) {
+            const picture_div = document.createElement("div");
+            picture_div.className = "mySlides" + (slideshowNo + 1) + " fade";
+            picture_div.style.display = "none";
+            const a = document.createElement("a");
+            a.target = image.target;
+            a.href = image.imgsrc[i];
+            const img = document.createElement("img");
+            img.src = image.imgsrc[i];
+            img.alt = image.alt[i]
+            picture_div.style = "display: none";
+            a.append(img);
+            picture_div.append(a);
+            const imgdescriptiondiv = document.createElement("div");
+            imgdescriptiondiv.className = "description";
+            imgdescriptiondiv.textContent = image.desc[i];
+            
 
-               const imgdiv = document.createElement("div");
-               imgdiv.className = "description";
-               imgdiv.textContent = image.desc;
+            container.append(picture_div);
+            picture_div.append(imgdescriptiondiv);
+          }
 
-               picture.append(imgdiv)
-               gallery.appendChild(picture);
+          const prev = document.createElement("a");
+          prev.className = "prev";
+          prev.onclick = () => plusSlides(-1, currentSlideNo);
+          prev.textContent = "❮";
 
+          const next = document.createElement("a");
+          next.className = "next";
+          next.onclick = () => plusSlides(1, currentSlideNo);
+          next.textContent = "❯";
 
-          });
+          container.append(prev);
+          container.append(next);
 
+          gallery.appendChild(container);
+          slideIndex.push(1);
+          slideId.push("mySlides" + (currentSlideNo + 1));
+          showSlides(1, currentSlideNo);
+          slideshowNo++;
+        } else {
+          const picture = document.createElement("div");
+          picture.className = "photo";
+          const a = document.createElement("a");
+          a.target = image.target;
+          a.href = image.imgsrc;
 
-     </script>
-</body>
+          const img = document.createElement("img");
+          img.src = image.imgsrc;
+          img.alt = image.alt;
 
+          a.append(img);
+          picture.append(a);
+
+          const imgdiv = document.createElement("div");
+          imgdiv.className = "description";
+          imgdiv.textContent = image.desc;
+
+          picture.append(imgdiv);
+          gallery.appendChild(picture);
+        }
+      });
+    </script>
+  </body>
 </html>
