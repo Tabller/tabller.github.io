@@ -1,103 +1,180 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <!-- <link rel="stylesheet" href="https://unpkg.com/chota@latest"> -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+20&display=swap"
+      rel="stylesheet"
+    />
+    <title>tabller.github.io</title>
+    <link rel="icon" type="image/x-icon" href="cool_gallery/kastrulya.png">
+  </head>
 
-<head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="index.css">
-     <title>Webpage</title>
-</head>
+  <body>
+    <header>
+      <div class="navbar jersey-20-regular">
+        <ul>
+          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="gallery.html">Cool Gallery</a></li>
+          <!-- <li><a href="basement_studio.html">basement</a></li> -->
+        </ul>
+      </div>
+      <div class="header jersey-20-regular">Welcome to my webpage</div>
+    </header>
+    <div id="lists-container" style="display: flex; height: fit-content"></div>
+    <script>
+      function copyDiscord() {
+        var copyText = "tabller";
 
-<body>
-     <header>
-          <div class="navbar">
-               <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="gallery.html">Cool Gallery</a></li>
-                    <li><a href="basement_studio.html">basement</a></li>
-               </ul>
-          </div>
-          <div class="header">Welcome to my webpage</div>
-     </header>
-     <div id="lists-container"></div>
-     <script>
-          const InfoBlocks = [
-               {
-                    title: "My Socials",
-                    items: [{ text: "My Discord Username: tabller", link: "" }, { text: "Twitch", link: "https://www.twitch.tv/mrtomit" }, { text: "Boosty", link: "https://boosty.to/mrtomit" }],
-                    color: "red",
-                    marker: true
-               },
-               {
-                    title: "My Projects",
-                    items: [{ text: "DimaBot", link: "https://github.com/Tabller/DimaBot", desc: "My main project" }, { text: "NeiroRer", link: "", desc: "A project where I tried to interact with some APIs to make an AI bot. Still undone" }, { text: "Doodle_mod", link: "https://github.com/Tabller/Doodle_mod" }, { text: "My Board Game", link: "https://docs.google.com/presentation/d/1Izl_WXgIOo4-VtgoqgT7ASQXtGzbFbKOOLx0-dNy374/edit?usp=sharing" }, { text: "Stardew Valley Mod: Pierre with sunglasses", link: "https://www.nexusmods.com/stardewvalley/mods/21245" }, { text: "Roblox game: a lovely soup", link: "https://www.roblox.com/games/84181445557198/a-lovely-soup" },
-                    { text: "Tabller's RPG World", link: "https://modrinth.com/modpack/tabllers-rpg-world" }
-                    ],
-                    marker: true
-               },
-               {
-                    title: "My Friends' Websites",
-                    items: [{ text: "Kotyarendj's website", link: "https://kotyarendj.github.io/" }, { text: "Intervinn's website", link: "https://intervinn.github.io/" }]
-               }
-          ];
+        navigator.clipboard.writeText(copyText);
+      }
 
-          const container = document.getElementById("lists-container");
+      const InfoBlocks = [
+        {
+          title: "My Socials",
+          items: [
+            { text: "Copy to Clipboard", link: "", id: "discord" },
+            { text: "Twitch", link: "https://www.twitch.tv/mrtomit", id: "" },
+            { text: "Boosty", link: "https://boosty.to/mrtomit", id: "" },
+          ],
+          color: "red",
+          marker: true,
+        },
+        {
+          title: "My Projects",
+          items: [
+            {
+              text: "DimaBot",
+              link: "https://github.com/Tabller/DimaBot",
+              desc: "My main project",
+            },
+            {
+              text: "NeiroRer",
+              link: "",
+              desc: "A project where I tried to interact with some APIs to make an AI bot. Still undone",
+            },
+            {
+              text: "Doodle_mod",
+              link: "https://github.com/Tabller/Doodle_mod",
+            },
+            {
+              text: "My Board Game",
+              link: "https://docs.google.com/presentation/d/1Izl_WXgIOo4-VtgoqgT7ASQXtGzbFbKOOLx0-dNy374/edit?usp=sharing",
+            },
+            {
+              text: "Stardew Valley Mod: Pierre with sunglasses",
+              link: "https://www.nexusmods.com/stardewvalley/mods/21245",
+            },
+            {
+              text: "Roblox game: a lovely soup",
+              link: "https://www.roblox.com/games/84181445557198/a-lovely-soup",
+            },
+            {
+              text: "Tabller's RPG World",
+              link: "https://modrinth.com/modpack/tabllers-rpg-world",
+            },
+          ],
+          marker: true,
+        },
+        {
+          title: "My Friends' Websites",
+          items: [
+            {
+              text: "Kotyarendj's website",
+              link: "https://kotyarendj.github.io/",
+            },
+            {
+              text: "Intervinn's website",
+              link: "https://intervinn.github.io/",
+            },
+            { text: "Graph of friends", link: "friends.html" },
+          ],
+        },
+      ];
 
-          InfoBlocks.forEach(list => {
-               const ul = document.createElement("ul")
+      const container = document.getElementById("lists-container");
 
-               ul.style.color = list.color;
-               ul.className = "box";
-               ul.style.listStylePosition = "inside";
-               ul.style.textAlign = "left";
+      InfoBlocks.forEach((list) => {
+        const ul = document.createElement("ul");
 
-               if (list.title) {
-                    const titleItem = document.createElement("li");
-                    titleItem.style.listStyleType = "none";
-                    titleItem.textContent = list.title;
-                    titleItem.style.fontWeight = "bold";
-                    ul.appendChild(titleItem);
-               }
+        ul.style.color = list.color;
+        ul.className = "box";
+        ul.style.listStylePosition = "inside";
+        ul.style.textAlign = "left";
+
+        if (list.title) {
+          const titleItem = document.createElement("li");
+          titleItem.style.listStyleType = "none";
+          titleItem.className = "jersey-20-regular";
+          titleItem.textContent = list.title;
+          titleItem.style.fontWeight = "bold";
+          ul.appendChild(titleItem);
+        }
+
+        list.items.forEach((item) => {
+          if (!item.id) {
+            const li = document.createElement("li");
+            li.className = "card";
+            li.style.width = "fit-content";
+
+            if (item.link) {
+              const link = document.createElement("a");
+              link.href = item.link;
+              link.target = "_blank";
+              link.textContent = item.text;
+              li.append(link);
+            } else {
+              li.textContent = item.text;
+            }
+            if (list.marker) {
+              li.style.listStylePosition = "inside";
+            } else {
+              li.style.listStyleType = "none";
+            }
+            if (item.desc) {
+              li.style.className = "tooltip";
+              li.style.position = "relative";
+              const span = document.createElement("span");
+              span.className = "tooltiptext";
+              span.textContent = item.desc;
+              li.append(span);
+            }
+            ul.appendChild(li);
+          } else {
+            if (item.id == "discord") {
+              const li = document.createElement("li");
+              li.className = "card";
+              li.style.className = "tooltip";
+              li.style.position = "relative";
 
 
-               list.items.forEach(item => {
-                    const li = document.createElement("li")
-                    li.className = "card";
-                    li.style.width = "fit-content";
-                    if (item.link) {
-                         const link = document.createElement("a")
-                         link.href = item.link;
-                         link.target = "_blank";
-                         link.textContent = item.text;
-                         li.append(link);
-                    } else {
-                         li.textContent = item.text
-                    }
-                    if (list.marker) {
-                         li.style.listStylePosition = "inside";
-                    } else {
-                         li.style.listStyleType = "none";
-                    }
-                    if (item.desc) {
-                         li.style.className = "tooltip";
-                         li.style.position = "relative";
-                         const span = document.createElement("span")
-                         span.className = "tooltiptext";
-                         span.textContent = item.desc;
-                         li.append(span);
-                    }
-                    ul.appendChild(li);
-               });
+              const tooltip = document.createElement("div");
+              tooltip.className = "tooltip";
 
-               container.appendChild(ul);
-          });
-     </script>
+              const button = document.createElement("button");
+              button.textContent = "My Discord Username";
+              button.id = "discord";
+              button.onclick = () => copyDiscord();
 
-     <footer>
-          <div class="footer">
-          </div>
-     </footer>
-</body>
+              const span = document.createElement("span");
+              span.className = "tooltiptext";
+              span.textContent = item.text;
+              button.append(span);
+              li.append(button);
+              ul.appendChild(li);
+            }
+          }
+        });
 
+        container.appendChild(ul);
+      });
+    </script>
 
+    <footer>
+      <div class="footer"></div>
+    </footer>
+  </body>
 </html>
